@@ -15,10 +15,20 @@
 
   body {
     @apply bg-ink-900 text-slate-200 antialiased;
+  }
+
+  /* Ambient gradient glow rendered on a FIXED layer behind everything.
+     Using a fixed pseudo-element (instead of background-attachment: fixed on
+     the body) keeps scrolling smooth — no full-page repaint every frame. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background-image:
       radial-gradient(60rem 60rem at 80% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
       radial-gradient(50rem 50rem at 0% 20%, rgba(6, 182, 212, 0.1), transparent 55%);
-    background-attachment: fixed;
   }
 
   ::selection {
@@ -29,7 +39,7 @@
 @layer components {
   /* Glassmorphism card surface */
   .glass {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md;
   }
 
   .glass-hover {

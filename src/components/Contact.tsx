@@ -45,13 +45,15 @@ export default function Contact() {
                 href={l.href}
                 target={l.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="glass glass-hover flex flex-col items-center gap-1 p-5"
+                className="glass glass-hover flex w-full flex-col items-center gap-1 overflow-hidden p-5"
               >
                 <span className="text-2xl">{l.icon}</span>
                 <span className="text-sm font-semibold text-white">
                   {l.label}
                 </span>
-                <span className="text-xs text-slate-500">{l.value}</span>
+                <span className="w-full break-words text-center text-xs text-slate-500">
+                  {l.value}
+                </span>
               </a>
             ))}
           </div>
