@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchored sections so the sticky navbar doesn't cover headings */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-ink-900 text-slate-200 antialiased;
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
+      radial-gradient(50rem 50rem at 0% 20%, rgba(6, 182, 212, 0.1), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-brand-via/30 text-white;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card surface */
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-card;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-from via-brand-via to-brand-to bg-clip-text text-transparent;
+  }
+
+  /* Primary gradient button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-from via-brand-via to-brand-to px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_50px_-8px_rgba(139,92,246,0.7)] active:scale-95;
+  }
+
+  /* Secondary / ghost glass button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/[0.08] active:scale-95;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300;
+  }
+}
+
+/* Custom scrollbar (premium feel) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05060a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366f1, #06b6d4);
+  border-radius: 999px;
+  border: 2px solid #05060a;
+}
