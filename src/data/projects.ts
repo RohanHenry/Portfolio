@@ -25,8 +25,15 @@ export interface Project {
   githubUrl: string;
   /** Whether a dedicated /projects/[slug] case study page exists */
   hasCaseStudy: boolean;
-  /** Accent gradient used on the card thumbnail */
+  /** Accent gradient used on the card thumbnail (fallback when no image) */
   accent: string;
+  /**
+   * Card thumbnail screenshot.
+   * 👉 Drop the image in /public/screenshots/ and set the path here, e.g.
+   *    image: "/screenshots/saas-customer-support-dashboard.png"
+   * Leave undefined to show the gradient + initials placeholder.
+   */
+  image?: string;
 
   // ---- Case study only fields (optional for projects without a page) ----
   caseStudy?: {
@@ -72,6 +79,8 @@ export const projects: Project[] = [
     githubUrl: "#", // TODO: replace with GitHub repo URL
     hasCaseStudy: true,
     accent: "from-indigo-500 via-violet-500 to-cyan-400",
+    // 👉 Add screenshot: save it as public/screenshots/saas-customer-support-dashboard.png then uncomment:
+    // image: "/screenshots/saas-customer-support-dashboard.png",
     caseStudy: {
       overview:
         "A full-stack SaaS support platform that mirrors the workflows real support teams use every day. Agents triage and resolve tickets, managers monitor performance through an analytics dashboard, and every privileged action is recorded in an audit trail. The project was built to demonstrate end-to-end product engineering — from a type-safe data layer to a polished, responsive interface.",
@@ -135,6 +144,8 @@ export const projects: Project[] = [
     githubUrl: "#", // TODO: replace with GitHub repo URL
     hasCaseStudy: true,
     accent: "from-cyan-400 via-sky-500 to-violet-500",
+    // 👉 Add screenshot: save it as public/screenshots/ai-website-growth-agent-platform.png then uncomment:
+    // image: "/screenshots/ai-website-growth-agent-platform.png",
     caseStudy: {
       overview:
         "An AI-powered SaaS tool that helps marketers and founders spin up landing page copy in seconds. Users describe their product, the platform generates structured landing page content, and they can then edit, preview it live, regenerate sections, and export production-ready HTML — all from a clean dashboard of saved pages.",
@@ -198,6 +209,8 @@ export const projects: Project[] = [
     githubUrl: "#", // TODO: replace with GitHub repo URL
     hasCaseStudy: false,
     accent: "from-emerald-400 via-teal-500 to-cyan-500",
+    // 👉 Add screenshot: save it as public/screenshots/ai-chat-bot.png then uncomment:
+    // image: "/screenshots/ai-chat-bot.png",
   },
 ];
 

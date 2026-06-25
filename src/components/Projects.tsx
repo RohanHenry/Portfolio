@@ -1,5 +1,6 @@
 import SectionHeading from "./SectionHeading";
 import ProjectCard from "./ProjectCard";
+import MoreProjects from "./MoreProjects";
 import { projects } from "@/data/projects";
 
 // ---------------------------------------------------------------------------
@@ -21,6 +22,9 @@ export default function Projects() {
           <ProjectCard key={project.slug} project={project} index={i} />
         ))}
       </div>
+
+      {/* "Explore More Projects" → opens a closable modal of all projects */}
+      <MoreProjects />
     </section>
   );
 }

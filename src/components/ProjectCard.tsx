@@ -25,22 +25,36 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ y: -6 }}
       className="glass glass-hover group flex flex-col overflow-hidden"
     >
-      {/* Thumbnail / placeholder banner */}
-      {/* 👉 SCREENSHOT: replace this gradient block with a <Image> once you add
-          a project thumbnail to /public/screenshots/ */}
+      {/* Thumbnail banner — shows the screenshot if `image` is set in
+          src/data/projects.ts, otherwise a gradient + initials placeholder. */}
       <div
         className={`relative h-44 overflow-hidden bg-gradient-to-br ${project.accent}`}
       >
-        <div className="absolute inset-0 bg-grid-faint [background-size:24px_24px] opacity-30" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-5xl font-black text-white/90 drop-shadow-lg">
-            {project.title
-              .split(" ")
-              .slice(0, 2)
-              .map((w) => w[0])
-              .join("")}
-          </span>
-        </div>
+        {project.image ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            {/* Subtle dark gradient so the title chip stays readable */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-grid-faint [background-size:24px_24px] opacity-30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-5xl font-black text-white/90 drop-shadow-lg">
+                {project.title
+                  .split(" ")
+                  .slice(0, 2)
+                  .map((w) => w[0])
+                  .join("")}
+              </span>
+            </div>
+          </>
+        )}
         <span className="absolute bottom-3 left-3 rounded-md bg-black/30 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white/80 backdrop-blur">
           Project Preview
         </span>
