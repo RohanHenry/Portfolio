@@ -75,12 +75,13 @@ export const projects: Project[] = [
       "Responsive UI",
       "Type-safe forms with React Hook Form and Zod",
     ],
-    liveUrl: "#", // TODO: replace with live demo URL
-    githubUrl: "#", // TODO: replace with GitHub repo URL
+    liveUrl: "https://saa-s-customer-support-dashboard.vercel.app",
+    githubUrl: "https://github.com/RohanHenry/SaaS-Customer-Support-Dashboard",
     hasCaseStudy: true,
     accent: "from-indigo-500 via-violet-500 to-cyan-400",
-    // 👉 Add screenshot: save it as public/screenshots/saas-customer-support-dashboard.png then uncomment:
-    // image: "/screenshots/saas-customer-support-dashboard.png",
+    // 👉 Screenshot file: save it as public/screenshots/saas-customer-support-dashboard.png
+    //    (falls back to the gradient automatically until the file exists)
+    image: "/screenshots/saas-customer-support-dashboard.png",
     caseStudy: {
       overview:
         "A full-stack SaaS support platform that mirrors the workflows real support teams use every day. Agents triage and resolve tickets, managers monitor performance through an analytics dashboard, and every privileged action is recorded in an audit trail. The project was built to demonstrate end-to-end product engineering — from a type-safe data layer to a polished, responsive interface.",
@@ -140,12 +141,14 @@ export const projects: Project[] = [
       "HTML export",
       "Deployment-ready architecture",
     ],
-    liveUrl: "#", // TODO: replace with live demo URL
-    githubUrl: "#", // TODO: replace with GitHub repo URL
+    // 👉 TODO: this repo has no live URL on GitHub — paste your Vercel live link here.
+    liveUrl: "#",
+    githubUrl: "https://github.com/RohanHenry/AI-Growth-Agent-Platform",
     hasCaseStudy: true,
     accent: "from-cyan-400 via-sky-500 to-violet-500",
-    // 👉 Add screenshot: save it as public/screenshots/ai-website-growth-agent-platform.png then uncomment:
-    // image: "/screenshots/ai-website-growth-agent-platform.png",
+    // 👉 Screenshot file: save it as public/screenshots/ai-website-growth-agent-platform.png
+    //    (falls back to the gradient automatically until the file exists)
+    image: "/screenshots/ai-website-growth-agent-platform.png",
     caseStudy: {
       overview:
         "An AI-powered SaaS tool that helps marketers and founders spin up landing page copy in seconds. Users describe their product, the platform generates structured landing page content, and they can then edit, preview it live, regenerate sections, and export production-ready HTML — all from a clean dashboard of saved pages.",
@@ -205,12 +208,13 @@ export const projects: Project[] = [
       "Reusable React components",
       "Responsive UI",
     ],
-    liveUrl: "#", // TODO: replace with live demo URL
-    githubUrl: "#", // TODO: replace with GitHub repo URL
+    liveUrl: "https://ai-chat-bot-sandy-tau.vercel.app",
+    githubUrl: "https://github.com/RohanHenry/AI-Chat-Bot",
     hasCaseStudy: false,
     accent: "from-emerald-400 via-teal-500 to-cyan-500",
-    // 👉 Add screenshot: save it as public/screenshots/ai-chat-bot.png then uncomment:
-    // image: "/screenshots/ai-chat-bot.png",
+    // 👉 Screenshot file: save it as public/screenshots/ai-chat-bot.png
+    //    (falls back to the gradient automatically until the file exists)
+    image: "/screenshots/ai-chat-bot.png",
   },
 ];
 

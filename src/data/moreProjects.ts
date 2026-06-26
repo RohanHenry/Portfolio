@@ -1,13 +1,13 @@
 // ---------------------------------------------------------------------------
 // MORE PROJECTS DATA
-// These show up in the "Explore More Projects" pop-up modal (NOT GitHub).
+// Shown in the "Explore More Projects" pop-up modal.
+// Sourced from your GitHub (github.com/RohanHenry) — the 3 featured projects
+// live in projects.ts and are intentionally not duplicated here.
 //
-// 👉 HOW TO ADD A PROJECT:
-//    1. Take a screenshot of the live site (the homepage / front page).
-//    2. Save it in /public/screenshots/  (e.g. hostel-website-1.png)
-//    3. Add an entry below with title, description, the live URL, and image.
-//
-// Until you add a real `image`, a gradient placeholder is shown automatically.
+// 👉 TO ADD A SCREENSHOT: save the live site's front page as an image in
+//    /public/screenshots/ and set `image` below. Until then a gradient shows.
+// 👉 liveUrl  = deployed site (opens in a new tab; primary "Live Demo" button)
+// 👉 repoUrl  = GitHub repo (optional "View Code" button — remove if unwanted)
 // ---------------------------------------------------------------------------
 
 export interface MoreProject {
@@ -15,41 +15,53 @@ export interface MoreProject {
   description: string;
   /** Tech / tags shown as small chips */
   tags: string[];
-  // 👉 LIVE URL — opens in a new tab (does NOT redirect away from the modal)
-  liveUrl: string;
-  /** Front-page screenshot, e.g. "/screenshots/hostel-website-1.png" */
+  /** Deployed site — shows a "Live Demo" button when set */
+  liveUrl?: string;
+  /** GitHub repo — shows a "View Code" button when set */
+  repoUrl?: string;
+  /** Front-page screenshot, e.g. "/screenshots/swoley-fit.png" */
   image?: string;
   /** Fallback gradient when no image is set */
   accent: string;
 }
 
 export const moreProjects: MoreProject[] = [
-  // ---- EXAMPLE / PLACEHOLDER ENTRIES — replace with your real Vercel sites ----
   {
-    title: "Hostel Website",
+    title: "Swoley Fit",
     description:
-      "A modern, responsive hostel/accommodation website with room listings, booking enquiry, and a clean marketing layout.",
-    tags: ["Next.js", "React", "Tailwind CSS"],
-    liveUrl: "#", // 👉 paste the Vercel live URL of this hostel site
-    // image: "/screenshots/hostel-website-1.png", // 👉 add the front-page screenshot
-    accent: "from-amber-400 via-orange-500 to-rose-500",
+      "A fitness app that lets users pick target muscle groups and training types (strength, hypertrophy) to generate customized workouts, with set tracking for structured routines.",
+    tags: ["React", "Tailwind CSS", "JavaScript"],
+    liveUrl: "https://swoley-fit-sigma.vercel.app",
+    repoUrl: "https://github.com/RohanHenry/Swoley-fit",
+    // image: "/screenshots/swoley-fit.png",
+    accent: "from-orange-400 via-rose-500 to-red-500",
   },
   {
-    title: "Hostel Website 2",
+    title: "E-Commerce Website",
     description:
-      "A second hostel website build with an updated design system, gallery, and contact/enquiry flow.",
-    tags: ["Next.js", "Tailwind CSS"],
-    liveUrl: "#", // 👉 paste the Vercel live URL of this hostel site
-    // image: "/screenshots/hostel-website-2.png", // 👉 add the front-page screenshot
-    accent: "from-sky-400 via-blue-500 to-indigo-500",
+      "A responsive e-commerce site for sneakers and fashion, featuring product listings, shopping pages, cart interactions, navigation, and promotional sections.",
+    tags: ["HTML5", "CSS3", "JavaScript"],
+    // No live URL yet — add one here once deployed.
+    repoUrl: "https://github.com/RohanHenry/E-commece-website",
+    // image: "/screenshots/ecommerce-website.png",
+    accent: "from-amber-400 via-orange-500 to-pink-500",
   },
   {
-    title: "Another Project",
+    title: "Agentic Security Platform",
     description:
-      "Short description of another project you've deployed. Duplicate this block for each additional project you want to showcase.",
-    tags: ["React", "JavaScript"],
-    liveUrl: "#", // 👉 paste the live URL
-    // image: "/screenshots/another-project.png",
-    accent: "from-emerald-400 via-teal-500 to-cyan-500",
+      "An AI-powered security log analysis API with risk scoring, suspicious-activity detection, incident reports, SQLite storage, and multi-agent threat investigation.",
+    tags: ["Python", "FastAPI", "AI Agents"],
+    repoUrl: "https://github.com/RohanHenry/agentic-security-platform",
+    // image: "/screenshots/agentic-security-platform.png",
+    accent: "from-slate-400 via-slate-500 to-indigo-500",
+  },
+  {
+    title: "NASA Astronomy Picture of the Day",
+    description:
+      "A React app that fetches NASA's APOD via their public API, displaying the daily image with details, a toggleable info sidebar, and a clean responsive UI.",
+    tags: ["React", "JavaScript", "REST API"],
+    repoUrl: "https://github.com/RohanHenry/NASA-s-Astronomy-Picture-of-the-Day",
+    // image: "/screenshots/nasa-apod.png",
+    accent: "from-sky-400 via-blue-500 to-indigo-600",
   },
 ];

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { moreProjects } from "@/data/moreProjects";
+import { moreProjects, type MoreProject } from "@/data/moreProjects";
 
 // ---------------------------------------------------------------------------
 // MoreProjects
@@ -84,61 +84,7 @@ export default function MoreProjects() {
               {/* Grid of projects */}
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {moreProjects.map((p) => (
-                  <article
-                    key={p.title}
-                    className="glass glass-hover group flex flex-col overflow-hidden"
-                  >
-                    {/* Front image / placeholder */}
-                    <div
-                      className={`relative h-36 overflow-hidden bg-gradient-to-br ${p.accent}`}
-                    >
-                      {p.image ? (
-                        <>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={p.image}
-                            alt={`${p.title} screenshot`}
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                        </>
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-4xl font-black text-white/90 drop-shadow-lg">
-                            {p.title
-                              .split(" ")
-                              .slice(0, 2)
-                              .map((w) => w[0])
-                              .join("")}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Body */}
-                    <div className="flex flex-1 flex-col p-5">
-                      <h3 className="font-bold text-white">{p.title}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
-                        {p.description}
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {p.tags.map((t) => (
-                          <span key={t} className="chip text-[11px]">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                      {/* Live link — opens in a new tab, modal stays open */}
-                      <a
-                        href={p.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary mt-4 px-4 py-2 text-xs"
-                      >
-                        Live Demo
-                      </a>
-                    </div>
-                  </article>
+                  <MoreProjectCard key={p.title} project={p} />
                 ))}
               </div>
             </motion.div>
@@ -146,5 +92,88 @@ export default function MoreProjects() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// MoreProjectCard — a single project tile inside the modal.
+// Tracks its own image-load error so a missing screenshot falls back to the
+// gradient + initials instead of showing a broken image.
+// ---------------------------------------------------------------------------
+function MoreProjectCard({ project: p }: { project: MoreProject }) {
+  const [imgError, setImgError] = useState(false);
+  const showImage = Boolean(p.image) && !imgError;
+  const hasLive = Boolean(p.liveUrl && p.liveUrl !== "#");
+
+  return (
+    <article className="glass glass-hover group flex flex-col overflow-hidden">
+      {/* Front image with gradient + initials fallback */}
+      <div
+        className={`relative h-36 overflow-hidden bg-gradient-to-br ${p.accent}`}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-4xl font-black text-white/90 drop-shadow-lg">
+            {p.title
+              .split(" ")
+              .slice(0, 2)
+              .map((w) => w[0])
+              .join("")}
+          </span>
+        </div>
+        {showImage && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={p.image}
+              alt={`${p.title} screenshot`}
+              onError={() => setImgError(true)}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="font-bold text-white">{p.title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
+          {p.description}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {p.tags.map((t) => (
+            <span key={t} className="chip text-[11px]">
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Links — open in a new tab; the modal stays open */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {hasLive && (
+            <a
+              href={p.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-4 py-2 text-xs"
+            >
+              Live Demo
+            </a>
+          )}
+          {/* Optional "View Code" — remove from data (repoUrl) if you prefer
+              not to link out to GitHub. */}
+          {p.repoUrl && (
+            <a
+              href={p.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-4 py-2 text-xs"
+            >
+              View Code
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }

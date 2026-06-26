@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
@@ -16,6 +17,10 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
+  // If the screenshot file isn't present yet, fall back to the gradient.
+  const [imgError, setImgError] = useState(false);
+  const showImage = Boolean(project.image) && !imgError;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 28 }}
@@ -30,29 +35,30 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <div
         className={`relative h-44 overflow-hidden bg-gradient-to-br ${project.accent}`}
       >
-        {project.image ? (
+        {/* Gradient + initials always render as the background fallback */}
+        <div className="absolute inset-0 bg-grid-faint [background-size:24px_24px] opacity-30" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-5xl font-black text-white/90 drop-shadow-lg">
+            {project.title
+              .split(" ")
+              .slice(0, 2)
+              .map((w) => w[0])
+              .join("")}
+          </span>
+        </div>
+
+        {/* Screenshot overlay — hides itself (revealing the fallback) on error */}
+        {showImage && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={project.image}
               alt={`${project.title} screenshot`}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={() => setImgError(true)}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             {/* Subtle dark gradient so the title chip stays readable */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          </>
-        ) : (
-          <>
-            <div className="absolute inset-0 bg-grid-faint [background-size:24px_24px] opacity-30" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-5xl font-black text-white/90 drop-shadow-lg">
-                {project.title
-                  .split(" ")
-                  .slice(0, 2)
-                  .map((w) => w[0])
-                  .join("")}
-              </span>
-            </div>
           </>
         )}
         <span className="absolute bottom-3 left-3 rounded-md bg-black/30 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white/80 backdrop-blur">
@@ -96,24 +102,29 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Buttons */}
         <div className="mt-6 flex flex-wrap gap-2 pt-2">
-          {/* 👉 LINK: live demo URL is set in src/data/projects.ts (liveUrl) */}
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary px-4 py-2 text-xs"
-          >
-            Live Demo
-          </a>
+          {/* 👉 LINK: live demo URL is set in src/data/projects.ts (liveUrl).
+              Hidden automatically until a real URL (not "#") is provided. */}
+          {project.liveUrl !== "#" && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-4 py-2 text-xs"
+            >
+              Live Demo
+            </a>
+          )}
           {/* 👉 LINK: GitHub URL is set in src/data/projects.ts (githubUrl) */}
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost px-4 py-2 text-xs"
-          >
-            GitHub
-          </a>
+          {project.githubUrl !== "#" && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-4 py-2 text-xs"
+            >
+              GitHub
+            </a>
+          )}
           {project.hasCaseStudy && (
             <Link
               href={`/projects/${project.slug}`}
