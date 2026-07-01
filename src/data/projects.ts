@@ -75,7 +75,7 @@ export const projects: Project[] = [
       "Responsive UI",
       "Type-safe forms with React Hook Form and Zod",
     ],
-    liveUrl: "https://saa-s-customer-support-dashboard.vercel.app",
+    liveUrl: "https://saa-s-customer-support-dashboard.vercel.app/dashboard",
     githubUrl: "https://github.com/RohanHenry/SaaS-Customer-Support-Dashboard",
     hasCaseStudy: true,
     accent: "from-indigo-500 via-violet-500 to-cyan-400",
@@ -141,8 +141,7 @@ export const projects: Project[] = [
       "HTML export",
       "Deployment-ready architecture",
     ],
-    // 👉 TODO: this repo has no live URL on GitHub — paste your Vercel live link here.
-    liveUrl: "#",
+    liveUrl: "https://ai-growth-agent-platform.vercel.app/",
     githubUrl: "https://github.com/RohanHenry/AI-Growth-Agent-Platform",
     hasCaseStudy: true,
     accent: "from-cyan-400 via-sky-500 to-violet-500",
